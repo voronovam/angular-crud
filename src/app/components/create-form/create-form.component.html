@@ -1,0 +1,35 @@
+<div class="mb-6">
+  <h3 class="mb-2 text-pink-400">{{ title }}</h3>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    class="flex gap-2"
+  >
+    <input
+      formControlName="name"
+      type="text"
+      class="border rounded px-4 py-2"
+      placeholder="Unicorn name"
+    >
+
+    <input
+      formControlName="colour"
+      type="text"
+      class="border rounded px-4 py-2"
+      placeholder="Unicorn Colour"
+    >
+
+    <input
+      formControlName="age"
+      type="text"
+      class="border rounded px-4 py-2"
+      placeholder="Unicorn age"
+    >
+
+    <button type="submit" class="px-4 py-2 bg-pink-400 text-white rounded">Create unicorn</button>
+  </form>
+
+  <p
+    *ngIf="name.errors?.minlength && name.touched"
+    class="text-pink-600 mt-1 mb-2 text-xs">fill minimum of 3 characters</p>
+</div>
