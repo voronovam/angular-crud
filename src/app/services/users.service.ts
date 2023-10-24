@@ -1,48 +1,47 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, retry, tap, throwError} from "rxjs";
-import {IUnicorn} from "../models/unicorn";
+import {IUser} from "../models/user";
 import {ErrorService} from "./error.service";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class UnicornsService {
+export class UsersService {
   constructor(
     private http: HttpClient,
     private errorService: ErrorService
   ) {}
 
-  unicorns: IUnicorn[] = []
+  users: IUser[] = []
 
-  getAll (): Observable<IUnicorn[]> {
-    return this.http.get<IUnicorn[]>('http://localhost:3000/users')
+  getAll (): Observable<IUser[]> {
+    return this.http.get<IUser[]>('http://localhost:3000/users')
       .pipe(
         retry(2),
-        tap(unicorns => this.unicorns = unicorns),
+        tap(users => this.users = users),
         catchError(this.errorHandler.bind(this))
       )
   }
 
-  create (unicorn: IUnicorn): Observable<IUnicorn> {
-    return this.http.post<IUnicorn>('http://localhost:3000/users', unicorn)
+  create (user: IUser): Observable<IUser> {
+    return this.http.post<IUser>('http://localhost:3000/users', user)
       .pipe(
-        tap(unic => this.unicorns.push(unic)),
+        tap(us => this.users.push(us)),
         catchError(this.errorHandler.bind(this))
       )
   }
 
-  delete (unicorn: IUnicorn): Observable<IUnicorn> {
-    return this.http.delete<IUnicorn>('http://localhost:3000/users/' + unicorn.id)
+  delete (user: IUser): Observable<IUser> {
+    return this.http.delete<IUser>('http://localhost:3000/users/' + user.id)
       .pipe(
-        //tap(unicorns => this.unicorns = unicorns),
         catchError(this.errorHandler.bind(this))
       )
   }
 
-  edit(unicorn: IUnicorn): Observable<IUnicorn> {
-    return this.http.put<IUnicorn>('http://localhost:3000/users/' + unicorn.id, unicorn)
+  edit(user: IUser): Observable<IUser> {
+    return this.http.put<IUser>('http://localhost:3000/users/' + user.id, user)
       .pipe(
         catchError(this.errorHandler.bind(this))
       );

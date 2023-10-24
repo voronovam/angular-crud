@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UnicornsService} from "./services/unicorns.service";
+import {UsersService} from "./services/users.service";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ export class AppComponent implements OnInit {
   title = 'CRUD app AngularJS v.16';
 
   constructor(
-    public unicornService: UnicornsService
+    public userService: UsersService
   ) {}
 
   ngOnInit(): void {
-    this.unicornService.getAll().subscribe();
+    this.userService.getAll().subscribe();
   }
 }

@@ -5,11 +5,11 @@
     title="Create user"
   ></app-create-form>
 
-  <div *ngIf="unicornService.unicorns">
-    <app-unicorn
-      *ngFor="let unicorn of unicornService.unicorns"
-      [unicorn]="unicorn"
-    ></app-unicorn>
+  <div *ngIf="userService.users">
+    <app-user
+      *ngFor="let user of userService.users"
+      [user]="user"
+    ></app-user>
   </div>
 
   <app-app-error></app-app-error>

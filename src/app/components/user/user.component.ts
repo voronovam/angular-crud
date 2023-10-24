@@ -1,15 +1,15 @@
 import {Component, Input} from "@angular/core";
-import {IUnicorn} from "../../models/unicorn";
-import {UnicornsService} from "../../services/unicorns.service";
+import {IUser} from "../../models/user";
+import {UsersService} from "../../services/users.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-unicorn',
-  templateUrl: './unicorn.component.html'
+  selector: 'app-user',
+  templateUrl: './user.component.html'
 })
-export class UnicornComponent {
+export class UserComponent {
   constructor(
-    private unicornService: UnicornsService) {}
+    private userService: UsersService) {}
 
 
   editForm = new FormGroup({
@@ -25,31 +25,31 @@ export class UnicornComponent {
 
   ngOnInit(): void {}
 
-  @Input() unicorn: IUnicorn;
+  @Input() user: IUser;
 
   isEditable = false;
 
   makeEditable () {
     this.isEditable = true;
-    this.editForm.patchValue(this.unicorn);
+    this.editForm.patchValue(this.user);
   }
 
   saveEdit() {
     this.isEditable = false;
 
     // @ts-ignore
-    const editedData: Partial<IUnicorn> = this.editForm.value;
+    const editedData: Partial<IUser> = this.editForm.value;
 
-    this.unicornService.edit({ ...this.unicorn, ...editedData })
+    this.userService.edit({ ...this.user, ...editedData })
       .subscribe(updatedVal => {
-        this.unicorn = updatedVal;
+        this.user = updatedVal;
       });
   }
 
-  remove(unicorn: IUnicorn) {
-    this.unicornService.delete(unicorn)
+  remove(user: IUser) {
+    this.userService.delete(user)
       .subscribe(() => {
-      this.unicornService.getAll().subscribe();
+      this.userService.getAll().subscribe();
     })
   }
 }

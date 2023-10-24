@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UnicornsService} from "../../services/unicorns.service";
+import {UsersService} from "../../services/users.service";
 
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html'
 })
 export class CreateFormComponent implements OnInit {
-  constructor(private unicornService: UnicornsService) {}
+  constructor(private userService: UsersService) {}
 
   @Input() title: string
 
@@ -31,7 +31,7 @@ export class CreateFormComponent implements OnInit {
   submit() {
     // @ts-ignore
     const idUser = Math.floor(Math.random() * 101); // генерим id при создании пользователя
-    this.unicornService.create({
+    this.userService.create({
       id: idUser,
       firstName: this.form.value.firstName as string,
       lastName: this.form.value.lastName as string,
@@ -39,7 +39,7 @@ export class CreateFormComponent implements OnInit {
       age: this.form.value.age as number,
       gender: this.form.value.gender as string,
     }).subscribe(() => {
-      this.unicornService;
+      this.userService;
       this.form.reset();
     })
   }
