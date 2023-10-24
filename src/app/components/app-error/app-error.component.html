@@ -1,6 +1,6 @@
 <div
   *ngIf="errorService.error$ | async as error"
-  class="h-[60] flex justify-center gap-16 text-center align-baseline bg-pink-600 p-1 text-white">
+  class="h-[60] absolute bottom-0 right-0 left-0 flex justify-center gap-16 text-center align-baseline bg-pink-600 p-1 text-white rounded px-8 px-4">
   <p>{{ error }}</p>
   <button
     title="close"

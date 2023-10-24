@@ -17,7 +17,7 @@ export class UnicornsService {
   unicorns: IUnicorn[] = []
 
   getAll (): Observable<IUnicorn[]> {
-    return this.http.get<IUnicorn[]>('https://crudcrud.com/api/65476344558c4a0d9cb52af050e497e0/unicorns')
+    return this.http.get<IUnicorn[]>('http://localhost:3000/users')
       .pipe(
         retry(2),
         tap(unicorns => this.unicorns = unicorns),
@@ -26,18 +26,26 @@ export class UnicornsService {
   }
 
   create (unicorn: IUnicorn): Observable<IUnicorn> {
-    return this.http.post<IUnicorn>('https://crudcrud.com/api/65476344558c4a0d9cb52af050e497e0/unicorns', unicorn)
+    return this.http.post<IUnicorn>('http://localhost:3000/users', unicorn)
       .pipe(
         tap(unic => this.unicorns.push(unic)),
         catchError(this.errorHandler.bind(this))
       )
   }
 
-  delete (unicorn: IUnicorn) {
-    return this.http.delete<IUnicorn>(`https://crudcrud.com/api/65476344558c4a0d9cb52af050e497e0/unicorns/${unicorn._id}`)
+  delete (unicorn: IUnicorn): Observable<IUnicorn> {
+    return this.http.delete<IUnicorn>('http://localhost:3000/users/' + unicorn.id)
       .pipe(
+        //tap(unicorns => this.unicorns = unicorns),
         catchError(this.errorHandler.bind(this))
       )
+  }
+
+  edit(unicorn: IUnicorn): Observable<IUnicorn> {
+    return this.http.put<IUnicorn>('http://localhost:3000/users/' + unicorn.id, unicorn)
+      .pipe(
+        catchError(this.errorHandler.bind(this))
+      );
   }
 
   private errorHandler(error: HttpErrorResponse) {

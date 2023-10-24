@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 6,
+      "firstName": "Sara",
+      "lastName": "Connor",
+      "email": "1@g.com",
+      "age": "24",
+      "gender": "female"
+    },
+    {
+      "id": 75,
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer.s@gmail.com",
+      "age": "52",
+      "gender": "male"
+    }
+  ]
+}

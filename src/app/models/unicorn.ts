@@ -1,6 +1,8 @@
 export interface IUnicorn {
-  _id?: string;
-  name?: string;
+  id?: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   age?: number;
-  colour?: string;
+  gender?: string;
 }

@@ -12,27 +12,35 @@ export class CreateFormComponent implements OnInit {
   @Input() title: string
 
   form = new FormGroup({
-    name: new FormControl<string>('', [
+    firstName: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(3)
     ]),
-    colour: new FormControl<string>(''),
-    age: new FormControl<number|null>(null)
+    lastName: new FormControl<string>(''),
+    email: new FormControl<string>(''),
+    age: new FormControl<number|null>(null),
+    gender: new FormControl<string>('')
   })
 
-  get name () {
-    return this.form.controls.name as FormControl;
+  get firstName () {
+    return this.form.controls.firstName as FormControl;
   }
 
   ngOnInit(): void {}
 
   submit() {
+    // @ts-ignore
+    const idUser = Math.floor(Math.random() * 101); // генерим id при создании пользователя
     this.unicornService.create({
-      name: this.form.value.name as string,
-      colour: this.form.value.colour as string,
+      id: idUser,
+      firstName: this.form.value.firstName as string,
+      lastName: this.form.value.lastName as string,
+      email: this.form.value.email as string,
       age: this.form.value.age as number,
+      gender: this.form.value.gender as string,
     }).subscribe(() => {
       this.unicornService;
+      this.form.reset();
     })
   }
 }
